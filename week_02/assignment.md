@@ -156,6 +156,105 @@ int count_sentences(string text)
 
 
 ```c
+substitution.c
 
+
+#include <cs50.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+int is_alpha(string cipher_text);
+int is_duplicate(string cipher_text);
+void encrypte(string cipher_text, string plain_text);
+
+// 더 최적화 가능한데 귀찮아서 안함. arr이나 encrypte
+
+int main(int argc, string argv[])
+{
+    if (argc != 2)
+    {
+        printf("Usage: ./substitution key\n");
+        return 1;
+    }
+
+    string cipher_text = argv[1];
+
+    if (is_alpha(cipher_text) == 0 || is_duplicate(cipher_text) == 1)
+    {
+        printf("Usage: ./substitution key\n");
+        return 1;
+    }
+    else if (strlen(cipher_text) != 26)
+    {
+        printf("Key must contain 26 characters.\n");
+        return 1;
+    }
+
+    string plain_text = get_string("plaintext: ");
+
+    encrypte(cipher_text, plain_text);
+
+    return 0;
+}
+
+int is_alpha(string cipher_text)
+{
+    int is_vaild = 1;
+
+    for (int i = 0, len = strlen(cipher_text); i < len; i++)
+    {
+        if (!isalpha(cipher_text[i]))
+        {
+            is_vaild = 0;
+        }
+    }
+    return is_vaild;
+}
+
+void encrypte(string cipher_text, string plain_text)
+{
+    printf("ciphertext: ");
+    for (int i = 0, len = strlen(plain_text); i < len; i++)
+    {
+        char cur_char = plain_text[i];
+        if (isalpha(cur_char))
+        {
+            int idx;
+            if (isupper(cur_char))
+            {
+                idx = cur_char - 65;
+                printf("%c", toupper(cipher_text[idx]));
+            }
+            else
+            {
+                idx = cur_char - 97;
+                printf("%c", tolower(cipher_text[idx]));
+            }
+        }
+        else
+        {
+            printf("%c", cur_char);
+        }
+    }
+    printf("\n");
+    return;
+}
+
+int is_duplicate(string cipher_text)
+{
+    int arr[100] = {0};
+    int is_duplicate = 0;
+
+    for (int i = 0, len = strlen(cipher_text); i < len; i++)
+    {
+        if (arr[cipher_text[i] - 65] == 1)
+        {
+            is_duplicate = 1;
+        }
+        arr[cipher_text[i] - 65] = 1;
+    }
+    return is_duplicate;
+}
 
 ```
