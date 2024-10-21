@@ -1,6 +1,5 @@
 ### References
 
-- 추가 필요
 - https://cs50.harvard.edu/x/2024/notes/2/
 - https://manual.cs50.io/
 - https://cs50.readthedocs.io/style/c/

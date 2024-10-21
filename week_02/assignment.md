@@ -1,6 +1,5 @@
 ### References
 
-- 추가 필요
 - https://cs50.harvard.edu/x/2024/psets/2/
 - https://manual.cs50.io/
 
